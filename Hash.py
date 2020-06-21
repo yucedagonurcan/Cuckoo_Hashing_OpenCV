@@ -1,8 +1,11 @@
 import cv2
 import time
+import warnings
 import numpy as np
 from utils import *
 from random import randint
+warnings.filterwarnings("ignore")
+
 class HashTable():
     
     def __init__(self, start_point, end_point, num_cells, name):

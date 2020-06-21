@@ -7,11 +7,11 @@ from Hash import HashCell, HashTable
 
 dummy = lambda x : 0
 
-WINDOW_NAME = 'Image'
-WIN_SIZE = [900, 1800, 3]
+MARGIN = 10
 NUM_CELLS = 10
 NUM_TABLES = 2
-MARGIN = 10
+WINDOW_NAME = 'Image'
+WIN_SIZE = [900, 1800, 3]
 
 def CheckLoop(number_history):
 
@@ -85,6 +85,16 @@ def CreateHashTables(win_size, num_tables, num_cells, margin):
 
 if __name__ == "__main__":
 
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--num_cells", type=int, help="Number of cells for each table.", default=10)
+    parser.add_argument("--num_tables", type=int, help="Number of tables.", default=2)
+    args = parser.parse_args()
+    
+    NUM_CELLS = args.num_cells
+    NUM_TABLES = args.num_tables
+    
+    print_yellow_bold(f"[ARGUMENT] Number of Cells: {NUM_CELLS}")
+    print_yellow_bold(f"[ARGUMENT] Number of Tables: {NUM_TABLES}")
 
     cv2.namedWindow(WINDOW_NAME)    
     cv2.createTrackbar("AddNumber", WINDOW_NAME, 1, 300, dummy)
@@ -102,8 +112,8 @@ if __name__ == "__main__":
                 table.DrawTable(image=image)
                 
         elif k == ord('r'):
-            image, hash_tables = CreateHashTables(win_size=WIN_SIZE, num_tables=NUM_TABLES, num_cells=NUM_CELLS, margin=MARGIN)
             number_history = []
+            image, hash_tables = CreateHashTables(win_size=WIN_SIZE, num_tables=NUM_TABLES, num_cells=NUM_CELLS, margin=MARGIN)
         elif k == 27:
             break
         cv2.imshow(WINDOW_NAME,image)
