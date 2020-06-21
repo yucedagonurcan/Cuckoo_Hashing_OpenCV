@@ -1,9 +1,8 @@
-
 import cv2
-import numpy as np
-from random import randint
 import time
+import numpy as np
 from utils import *
+from random import randint
 class HashTable():
     
     def __init__(self, start_point, end_point, num_cells, name):

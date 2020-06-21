@@ -1,8 +1,9 @@
 import cv2
 import random
+import argparse
 import numpy as np
-from Hash import HashCell, HashTable
 from utils import *
+from Hash import HashCell, HashTable
 
 dummy = lambda x : 0
 
@@ -84,27 +85,15 @@ def CreateHashTables(win_size, num_tables, num_cells, margin):
 
 if __name__ == "__main__":
 
-    cv2.namedWindow(WINDOW_NAME)
-    # cv2.createTrackbar("Margin", WINDOW_NAME, 10, 100, dummy)
-    # cv2.setTrackbarMin("Margin", WINDOW_NAME, 10)
-    
-    # cv2.createTrackbar("NumCells", WINDOW_NAME, 10, 100, dummy)
-    # cv2.setTrackbarMin("NumCells", WINDOW_NAME, 1)
-    
-    # cv2.createTrackbar("NumTables", WINDOW_NAME, 1, 30, dummy)
-    # cv2.setTrackbarMin("NumTables", WINDOW_NAME, 1)
-    
+
+    cv2.namedWindow(WINDOW_NAME)    
     cv2.createTrackbar("AddNumber", WINDOW_NAME, 1, 300, dummy)
     cv2.setTrackbarMin("AddNumber", WINDOW_NAME, 0)
     image, hash_tables = CreateHashTables(win_size=WIN_SIZE, num_tables=NUM_TABLES, num_cells=NUM_CELLS, margin=MARGIN)
     number_history = []
     while(True):
-        
-        # margin = cv2.getTrackbarPos("Margin", WINDOW_NAME)
-        # num_cells = cv2.getTrackbarPos("NumCells", WINDOW_NAME)
-        # num_tables = cv2.getTrackbarPos("NumTables", WINDOW_NAME)
+
         add_number = cv2.getTrackbarPos("AddNumber", WINDOW_NAME)
-        
         k = cv2.waitKey(1) & 0xFF
         if k == ord('p'):
             print_yellow_bold(f"Trying to add {add_number} into hash tables.")
