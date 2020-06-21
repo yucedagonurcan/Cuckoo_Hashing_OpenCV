@@ -3,6 +3,7 @@ import cv2
 import numpy as np
 from random import randint
 import time
+from utils import *
 class HashTable():
     
     def __init__(self, start_point, end_point, num_cells, name):
@@ -68,7 +69,7 @@ class HashTable():
         
     def TryAddNumber(self, number, image, winname):
         
-        print(f"- {number} is trying to added to {self.name}: ")
+        print_yellow_bold(f"\t-> {number} is trying to added to {self.name}: ")
         index_to_place = self.HashFunc(number)
         # self.cells[index_to_place].color = (255, 255, 255)
         
@@ -86,13 +87,13 @@ class HashTable():
                 break;
             i += 1
         if self.cells[index_to_place].is_empty:
-            print(f"\t{index_to_place} is empty, so {number} will be added.")
+            print_green_bold(f"\t\t[SUCCESS] {index_to_place} is empty, so {number} will be added.")
             self.cells[index_to_place].color = (55, 0, 0)
             self.cells[index_to_place].text_color = (255, 255, 255)
 
             self.cells[index_to_place].SetNumber(number = number)
         else:
-            print(f"\t{index_to_place} is NOT empty, so we are re-inserting {self.cells[index_to_place].number} to add {number} in {self.name} hash table")
+            print_red_bold(f"\t\t[FAIL] {index_to_place} is NOT empty, so we are re-inserting {self.cells[index_to_place].number} to add {number} in {self.name} hash table")
             self.cells[index_to_place].color = (55, 0, 0)
             self.cells[index_to_place].text_color = (255, 255, 255)
 
