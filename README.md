@@ -16,7 +16,7 @@ Cuckoo Hashing visualization using OpenCV as a GUI.
 
 ## How to run it?
 
-1. `python CuckooHashing.py --num_cells 20 --num_tables 10` will open a window for visualization for the algorithm:
+1. `python CuckooHashing.py --num_cells 20 --num_tables 10` will open a window for visualization of the algorithm:
    1. ![](imgs/start.png)
 2. You should see a slider below of the window. You can use it to select a number to insert into hash tables:
    1. ![](imgs/Slider.gif)
