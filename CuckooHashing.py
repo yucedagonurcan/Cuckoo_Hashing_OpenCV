@@ -10,8 +10,8 @@ dummy = lambda x : 0
 MARGIN = 10
 NUM_CELLS = 10
 NUM_TABLES = 2
-WINDOW_NAME = 'Image'
-WIN_SIZE = [900, 1800, 3]
+WINDOW_NAME = 'Cuckoo Hashing Visualization'
+WIN_SIZE = [900, 1400, 3]
 
 def CheckLoop(number_history):
 
@@ -67,6 +67,9 @@ def AddNumberToHashTables(hash_tables, number, exclude_hash_tables, number_histo
 def CreateHashTables(win_size, num_tables, num_cells, margin):
     hash_tables = []
     image = np.zeros(shape=win_size)
+    info_text_font_scale = 0.7
+    cv2.putText(image, "Press 'p' for PLAY", (15, 20), cv2.FONT_HERSHEY_COMPLEX_SMALL, info_text_font_scale, (255, 255, 255))
+    cv2.putText(image, "Press 'r' for RESET", (15, 40), cv2.FONT_HERSHEY_COMPLEX_SMALL, info_text_font_scale, (255, 255, 255))
 
     width_of_each_table = round((win_size[1]*0.8)/num_tables)
     for i in range(num_tables):
@@ -93,10 +96,12 @@ if __name__ == "__main__":
     NUM_CELLS = args.num_cells
     NUM_TABLES = args.num_tables
     
+    reset_needed = False
     print_yellow_bold(f"[ARGUMENT] Number of Cells: {NUM_CELLS}")
     print_yellow_bold(f"[ARGUMENT] Number of Tables: {NUM_TABLES}")
 
-    cv2.namedWindow(WINDOW_NAME)    
+    cv2.namedWindow(WINDOW_NAME)  
+    cv2.moveWindow(WINDOW_NAME, 0, 0)  
     cv2.createTrackbar("AddNumber", WINDOW_NAME, 1, 300, dummy)
     cv2.setTrackbarMin("AddNumber", WINDOW_NAME, 0)
     image, hash_tables = CreateHashTables(win_size=WIN_SIZE, num_tables=NUM_TABLES, num_cells=NUM_CELLS, margin=MARGIN)
@@ -105,14 +110,17 @@ if __name__ == "__main__":
 
         add_number = cv2.getTrackbarPos("AddNumber", WINDOW_NAME)
         k = cv2.waitKey(1) & 0xFF
-        if k == ord('p'):
+        number_history = []
+
+        if k == ord('p') and not reset_needed:
             print_yellow_bold(f"Trying to add {add_number} into hash tables.")
-            AddNumberToHashTables(hash_tables=hash_tables, number=add_number, exclude_hash_tables=[], number_history=number_history)
+            if not AddNumberToHashTables(hash_tables=hash_tables, number=add_number, exclude_hash_tables=[], number_history=number_history):
+                reset_needed = True
             for table in hash_tables:
                 table.DrawTable(image=image)
                 
         elif k == ord('r'):
-            number_history = []
+            reset_needed = False
             image, hash_tables = CreateHashTables(win_size=WIN_SIZE, num_tables=NUM_TABLES, num_cells=NUM_CELLS, margin=MARGIN)
         elif k == 27:
             break
