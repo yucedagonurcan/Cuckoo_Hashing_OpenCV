@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Cuckoo Hashing OpenCV</title>
+        <style>
+</style>
+        
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+<style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        <style>
+.task-list-item { list-style-type: none; } .task-list-item-checkbox { margin-left: -20px; vertical-align: middle; }
+</style>
+        
+        
+        
+    </head>
+    <body class="vscode-light">
+        <h1 id="cuckoo-hashing-opencv">Cuckoo Hashing OpenCV</h1>
+<p>Cuckoo Hashing visualization using OpenCV as a GUI.</p>
+<h2 id="requirements">Requirements</h2>
+<ol>
+<li>
+<p>Python 3.+</p>
+</li>
+<li>
+<p>OpenCV bindings for Python:</p>
+<ol>
+<li><code>pip install opencv-python</code> : <a href="https://pypi.org/project/opencv-python/">Source</a></li>
+</ol>
+</li>
+<li>
+<p>NumPy 1.18</p>
+<ol>
+<li><code>pip install numpy</code> : <a href="https://pypi.org/project/numpy/">Source</a></li>
+</ol>
+</li>
+<li>
+<p><em>[NOTE]: If you are using Conda environment you can use <code>requirements.txt</code>:</em></p>
+<ul>
+<li><code>conda create --file requirements.txt</code></li>
+</ul>
+</li>
+</ol>
+<h2 id="how-to-run-it">How to run it?</h2>
+<ol>
+<li><code>python CuckooHashing.py --num_cells 20 --num_tables 10</code> will open a window for visualization for the algorithm:
+<ol>
+<li><img src="file:////home/oyucedag/Development/School/Cuckoo_Hashing_OpenCV/imgs/start.png" alt=""></li>
+</ol>
+</li>
+<li>You should see a slider below of the window. You can use it to select a number to insert into hash tables:
+<ol>
+<li><img src="file:////home/oyucedag/Development/School/Cuckoo_Hashing_OpenCV/imgs/Slider.gif" alt=""></li>
+</ol>
+</li>
+<li>Also, you can see occupancy rate for each table on bottom of the window:
+<ol>
+<li><img src="file:////home/oyucedag/Development/School/Cuckoo_Hashing_OpenCV/imgs/Occupancy.png" alt=""></li>
+</ol>
+</li>
+<li>For actually adding the number into hash tables, press <strong>p (play)</strong>. When you press it, cells that are going to be used for insertion will light up one by one. So, if there is an occulusion at insertion of a number, it will insert the new number into occluded cell and try another hash table for insertion for the old number. You can see all the dynamics:
+<ol>
+<li><img src="file:////home/oyucedag/Development/School/Cuckoo_Hashing_OpenCV/imgs/Insertion.gif" alt=""></li>
+<li>You can also see the log messages from the terminal:
+<ol>
+<li>It will print different message types with different color.</li>
+<li>It will print:
+<ol>
+<li>Number that currently wanted to be inserted.</li>
+<li>Cell that is currently to be used for insertion.</li>
+<li>Whether a number is already in hash tables or not.</li>
+<li>Whether there is an occlusion during the insertion or not.</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>Finally, if there are cycles you can always use <strong>r (reset)</strong> button to reset the hash tables. Terminal will inform you whether you need to reset the tables or not:
+<ol>
+<li><img src="file:////home/oyucedag/Development/School/Cuckoo_Hashing_OpenCV/imgs/Reset.gif" alt=""></li>
+</ol>
+</li>
+</ol>
+
+    </body>
+    </html>
